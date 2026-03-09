@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
 """
-抖音视频下载器
-从抖音分享链接下载视频
+抖音视频下载器 v2
+从抖音分享链接或视频ID下载视频
 
-使用说明：
+使用方法：
     python3 douyin_download.py "抖音链接"
+    python3 douyin_download.py "视频ID"
+
+核心要点：
+1. 必须使用iPhone User-Agent
+2. 视频URL在HTML的JavaScript里，需要解析JSON
+3. 或者直接使用已知视频ID和video_id
 """
 
 import requests
@@ -12,7 +18,7 @@ import re
 import json
 import sys
 import argparse
-from urllib.parse import urlparse, parse_qs
+from urllib.parse import urlparse, parse_qs, unquote
 import os
 
 # iPhone User-Agent - 抖音需要伪装成手机浏览器
